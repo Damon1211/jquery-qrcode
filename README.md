@@ -42,3 +42,8 @@ function toUtf8(str) {
     return out;    
 }
 ```
+
+
+### 参考链接
+
+[jeromeetienne/jquery-qrcode](https://github.com/jeromeetienne/jquery-qrcode)
