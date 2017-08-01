@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Jquery二维码生成</title>
+	<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="jquery.qrcode.min.js"></script>
+
+
+	<style type="text/css">
+	
+	</style>
+	<script type="text/javascript">
+
+		$(function(){
+			
+			$("#generateQrCode").click(function(){
+				loadQrCode(toUtf8($("#qrCodeStr").val()));
+			});
+
+			function loadQrCode(str){
+				$("#code").empty();
+				$("#code").qrcode({ 
+				    render: "table", //table方式 
+				    width: 200, //宽度 
+				    height:200, //高度 
+				    text: str //任意内容 
+				});
+			}
+
+			loadQrCode("http://www.jiayijiatw.com");
+
+			function toUtf8(str) {    
+			    var out, i, len, c;    
+			    out = "";    
+			    len = str.length;    
+			    for(i = 0; i < len; i++) {    
+			        c = str.charCodeAt(i);    
+			        if ((c >= 0x0001) && (c <= 0x007F)) {    
+			            out += str.charAt(i);    
+			        } else if (c > 0x07FF) {    
+			            out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));    
+			            out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));    
+			            out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));    
+			        } else {    
+			            out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));    
+			            out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));    
+			        }    
+			    }    
+			    return out;    
+			} 
+		}); 
+
+		
+	</script>
+</head>
+	<div class="container">
+		<div>
+			<input type="text" name="qrCodeStr" id="qrCodeStr">
+			<button id="generateQrCode">生成二维码</button>
+		</div>
+		<br>
+		<div id="code">
+		
+		</div>
+	</div>
+</body>
+</html>
